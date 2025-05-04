@@ -1,0 +1,4 @@
+# requirements.txt
+google-api-python-client
+textblob
+matplotlib
