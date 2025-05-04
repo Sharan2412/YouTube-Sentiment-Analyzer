@@ -1,0 +1,20 @@
+---
+
+## **3. YouTube Sentiment Analyzer**  
+**`README.md`**
+
+```markdown
+# YouTube Sentiment Analyzer
+
+This project analyzes sentiments from YouTube video comments using TextBlob. It visualizes the distribution of positive, negative, and neutral comments.
+
+## Features
+- Fetches top 100 comments from any YouTube video using the YouTube Data API
+- Sentiment analysis using TextBlob
+- Pie chart visualization of sentiment distribution
+
+## Setup
+1. Get a YouTube Data API key from [Google Cloud Console](https://console.developers.google.com).
+2. Replace `YOUR_YOUTUBE_API_KEY` and `VIDEO_ID_HERE` in the script.
+
+## Requirements
