@@ -1,0 +1,38 @@
+# youtube_sentiment.py
+from googleapiclient.discovery import build
+from textblob import TextBlob
+import matplotlib.pyplot as plt
+
+API_KEY = 'YOUR_YOUTUBE_API_KEY'
+video_id = 'VIDEO_ID_HERE'
+
+# YouTube API client
+youtube = build('youtube', 'v3', developerKey=API_KEY)
+
+# Fetch comments
+comments = []
+response = youtube.commentThreads().list(part='snippet', videoId=video_id, maxResults=100).execute()
+
+for item in response['items']:
+    comment = item['snippet']['topLevelComment']['snippet']['textDisplay']
+    comments.append(comment)
+
+# Sentiment Analysis
+positive, negative, neutral = 0, 0, 0
+
+for c in comments:
+    analysis = TextBlob(c)
+    if analysis.sentiment.polarity > 0:
+        positive += 1
+    elif analysis.sentiment.polarity < 0:
+        negative += 1
+    else:
+        neutral += 1
+
+# Plot
+labels = ['Positive', 'Negative', 'Neutral']
+sizes = [positive, negative, neutral]
+plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
+plt.axis('equal')
+plt.title('YouTube Comment Sentiment Analysis')
+plt.show()
